@@ -400,9 +400,9 @@
 
           </div>
 
-          <!-- <div class="col-lg-8 mt-5 mt-lg-0">
+          <div class="col-lg-8 mt-5 mt-lg-0">
 
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <!-- <form action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
@@ -423,9 +423,25 @@
                 <div class="sent-message">Your message has been sent. Thank you!</div>
               </div>
               <div class="text-center"><button type="submit">Send Message</button></div>
+            </form> -->
+
+            <form action="forms/send_email.php" method="post">
+              <label for="name">ชื่อ:</label>
+              <input type="text" id="name" name="name" required>
+              
+              <label for="email">อีเมล:</label>
+              <input type="email" id="email" name="email" required>
+              
+              <label for="subject">เรื่อง:</label>
+              <input type="text" id="subject" name="subject" required>
+              
+              <label for="message">ข้อความ:</label>
+              <textarea id="message" name="message" required></textarea>
+              
+              <button type="submit">ส่ง</button>
             </form>
          
-          </div> -->
+          </div> 
 
         </div>
 
