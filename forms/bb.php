@@ -1,8 +1,8 @@
 <?php
 // ต้องรวมไฟล์ PHPMailer ก่อนการใช้งาน
-require_once "path/to/PHPMailer/PHPMailer.php";
-require_once "path/to/PHPMailer/SMTP.php";
-require_once "path/to/PHPMailer/Exception.php";
+require_once "PHPMailer/src/PHPMailer.php";
+require_once "PHPMailer/src/SMTP.php";
+require_once "PHPMailer/src/Exception.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
