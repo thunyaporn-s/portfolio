@@ -1,41 +1,57 @@
-<?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
-
-  // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'thunyaporng@gmail.com';
-
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
-
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
-  
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
-
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  
-  // $contact->smtp = array(
-  //   'host' => 'example.com',
-  //   'username' => 'example',
-  //   'password' => 'pass',
-  //   'port' => '587'
-  // );
-  
-
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
-
-  echo $contact->send();
-?>
+<?
+require("phpmailer/class.phpmailer.php"); // path to the PHPMailer class.
+ 
+$fm = "thunyah.service@gmail.com"; // *** ต้องใช้อีเมล์ @gmail.com เท่านั้น ***
+$to = "thunyaporng@gmail.com"; // อีเมล์ที่ใช้รับข้อมูลจากแบบฟอร์ม
+$custemail = $_POST['email']; // อีเมล์ของผู้ติดต่อที่กรอกผ่านแบบฟอร์ม
+ 
+$subj = $_POST['subject'];
+ 
+/* ------------------------------------------------------------------------------------------------------------- */
+$message.= "ชื่อ-นามสกุล: ".$_POST['name']."\n";
+$message.= "อีเมล์: ".$_POST['email']."\n";
+$message.= "หัวข้อ: ".$_POST['subject']."\n";
+$message.= "รายละเอียด: ".$_POST['details']."\n";
+/* ------------------------------------------------------------------------------------------------------------- */
+ 
+/* หากต้องการรับข้อมูลจาก Form แบบไม่ระบุชื่อตัวแปร สามารถรับข้อมูลได้ไม่จำกัด ให้ลบบรรทัด 11-14 แล้วใช้ 19-22 แทน
+     
+foreach ($_POST as $key => $value) {
+ //echo "Field ".htmlspecialchars($key)." is ".htmlspecialchars($value)."<br>";
+ $message.= "Field ".htmlspecialchars($key)." = ".htmlspecialchars($value)."\n";
+}
+ 
+*/
+ 
+$mesg = $message;
+ 
+$mail = new PHPMailer();
+$mail->CharSet = "utf-8"; 
+ 
+/* ------------------------------------------------------------------------------------------------------------- */
+/* ตั้งค่าการส่งอีเมล์ โดยใช้ SMTP ของ Gmail */
+$mail->IsSMTP();
+$mail->Mailer = "smtp";
+$mail->IsSMTP(); // telling the class to use SMTP
+$mail->SMTPAuth = true;                  // enable SMTP authentication
+$mail->SMTPSecure = "tls";                 // sets the prefix to the servier
+$mail->Host = "smtp.gmail.com";      // sets GMAIL as the SMTP server
+$mail->Port = 587;                   // set the SMTP port for the GMAIL server
+$mail->Username = "thunyah.service@gmail.com";  // Gmail username หรือหากท่านใช้ G-suite / WorkSpace ให้ใช้อีเมล์ @you@yourdomain แทน
+$mail->Password = "service1234!";    // Gmail password
+/* ------------------------------------------------------------------------------------------------------------- */
+ 
+$mail->From = $fm;
+$mail->AddAddress($to);
+$mail->AddReplyTo($custemail);
+$mail->Subject = $subj;
+$mail->Body     = $mesg;
+$mail->WordWrap = 50;  
+//
+if(!$mail->Send()) {
+echo 'Message was not sent.';
+echo 'ยังไม่สามารถส่งเมลล์ได้ในขณะนี้ ' . $mail->ErrorInfo;
+exit;
+} else {
+echo 'ส่งเมลล์สำเร็จ';
+}
