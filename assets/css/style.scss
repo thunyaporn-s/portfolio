@@ -193,7 +193,7 @@ h6 {
 	top: 0;
 	left: 0;
 	bottom: 0;
-	z-index: 9997;
+	z-index: 9;
 	transition: all 0.5s;
 	padding: 15px;
 	overflow-y: auto;
@@ -1159,6 +1159,18 @@ text-align: right;
 	.name{
 		font-size: 0.9em;
 	}		
+}
+
+.btn-cv{
+	background: #ec27b8;
+	color: #ffffff;
+	padding: 10px 20px;
+	transition: 0.3s;
+	
+	&:hover{
+		color: #ffffff;
+		background: #560a8c;
+	}
 }
 
 
