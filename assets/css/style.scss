@@ -1151,6 +1151,16 @@ text-align: right;
     height: 550px;
 }
 
+.skill-box{
+	.img-skill{
+		height: 70px;
+		margin: 1em;
+	}
+	.name{
+		font-size: 0.9em;
+	}		
+}
+
 
 
 @import "responsive";
